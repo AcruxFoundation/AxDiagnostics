@@ -12,6 +12,8 @@ namespace AxDiagnostics
 		Info,
 		Warning,
 		Error,
-		Fatal
+		Fatal,
+		ProcessStart,
+		ProcessFinish
 	}
 }

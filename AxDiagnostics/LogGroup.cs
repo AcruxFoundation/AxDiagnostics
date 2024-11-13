@@ -13,6 +13,7 @@ namespace AxDiagnostics
 		public IOrderedEnumerable<Log> OrderedLogs => Logs.OrderBy(x => x.CreationDate);
 		public DateTime FirstTimeLogged => OrderedLogs.First().CreationDate;
 		public DateTime LastTimeLogged => OrderedLogs.Last().CreationDate;
+		public byte Indentation { get; private set; }
 
 		public void Log(Log log)
 		{
@@ -24,6 +25,9 @@ namespace AxDiagnostics
 		{
 			Logs.Add(log);
 		}
+
+		public byte Indent() => Indentation++;
+		public byte Unindent() => Indentation--;
 
 		public void Display()
 		{
