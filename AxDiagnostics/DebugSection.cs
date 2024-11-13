@@ -3,6 +3,10 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace AxDiagnostics
 {
+	/// <summary>
+	/// A collection of <see cref="LogGroup"/>s.<br></br>
+	/// Generally used to group the different <see cref="LogGroup"/>s used in a specific system or module.
+	/// </summary>
 	public class DebugSection
 	{
 		public string Name { get; }

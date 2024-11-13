@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace AxDiagnostics
 {
+	/// <summary>
+	/// Creates an automatic <see cref="LogGroup"/> manager. <br></br>
+	/// Allows the automatic managment of the
+	/// <see cref="LogGroup.Indent"/> and <see cref="LogGroup.Unindent"/> calls
+	/// and simplifies the logging mechanism to the specified <see cref="Group"/>
+	/// </summary>
 	public class DebugProcess : IDisposable
 	{
 		private LogGroup Group { get; }

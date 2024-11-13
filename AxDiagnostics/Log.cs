@@ -3,10 +3,13 @@ using System.Reflection;
 
 namespace AxDiagnostics
 {
+	/// <summary>
+	/// Represents a message emitted by an event or system when certain actions are given.
+	/// </summary>
 	public class Log
 	{
 		public string Text { get; }
-		public LogKind Kind { get; }
+		public LogSeverity Severity { get; }
 		public DateTime CreationDate { get; }
 		private Thread OriginThread { get; }
 		public string? OriginThreadName => OriginThread.Name;
@@ -25,45 +28,45 @@ namespace AxDiagnostics
 		public override string ToString()
 		{
 			string indentationString = new string('#', Indentation).Replace("#","|\t");
-			return $"[{CreationDate}]\t{indentationString}[{Kind}] ({OriginThreadName} @ {OriginTypeFQN}.{OriginMethodName}) : {Text}";
+			return $"[{CreationDate}]\t{indentationString}[{Severity}] ({OriginThreadName} @ {OriginTypeFQN}.{OriginMethodName}) : {Text}";
 		}
 
 		#region Kind Driven Construction
-		public static Log Message(string text) => new Log(text, LogKind.Message, 2);
-		public static Log Info(string text) => new Log(text, LogKind.Info, 2);
-		public static Log Warning(string text) => new Log(text, LogKind.Warning, 2);
-		public static Log Error(string text) => new Log(text, LogKind.Error, 2);
-		public static Log Fatal(string text) => new Log(text, LogKind.Fatal, 2);
-		internal static Log ProcessStart(string text) => new Log(text, LogKind.ProcessStart, 3);
-		internal static Log ProcessFinish(string text) => new Log(text, LogKind.ProcessFinish, 3);
+		public static Log Message(string text) => new Log(text, LogSeverity.Message, 2);
+		public static Log Info(string text) => new Log(text, LogSeverity.Info, 2);
+		public static Log Warning(string text) => new Log(text, LogSeverity.Warning, 2);
+		public static Log Error(string text) => new Log(text, LogSeverity.Error, 2);
+		public static Log Fatal(string text) => new Log(text, LogSeverity.Fatal, 2);
+		internal static Log ProcessStart(string text) => new Log(text, LogSeverity.ProcessStart, 3);
+		internal static Log ProcessFinish(string text) => new Log(text, LogSeverity.ProcessFinish, 3);
 		#endregion
 
-		private Log(string text, LogKind kind, byte frameIndex)
+		private Log(string text, LogSeverity kind, byte frameIndex)
 		{
 			StackTrace stackTrace = new StackTrace();
 
 			Text = text;
-			Kind = kind;
+			Severity = kind;
 			OriginMethod = stackTrace.GetFrame(frameIndex)?.GetMethod();
 			OriginThread ??= Thread.CurrentThread;
 			CreationDate = DateTime.Now;
 		}
 
-		public Log(string text, LogKind kind)
+		public Log(string text, LogSeverity kind)
 		{
 			StackTrace stackTrace = new StackTrace();
 
 			Text = text;
-			Kind = kind;
+			Severity = kind;
 			OriginMethod = stackTrace.GetFrame(1)?.GetMethod();
 			OriginThread ??= Thread.CurrentThread;
 			CreationDate = DateTime.Now;
 		}
 
-		public Log(string text, LogKind kind, MethodBase? originMethod, Thread? originThread = null)
+		public Log(string text, LogSeverity kind, MethodBase? originMethod, Thread? originThread = null)
 		{
 			Text = text;
-			Kind = kind;
+			Severity = kind;
 			OriginMethod = originMethod;
 			OriginThread ??= Thread.CurrentThread;
 			CreationDate = DateTime.Now;

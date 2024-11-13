@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace AxDiagnostics
 {
-	public enum LogKind : byte
+	/// <summary>
+	/// Represents the severity or cause of the creation of a <see cref="Log"/>
+	/// </summary>
+	public enum LogSeverity : byte
 	{
 		Message,
 		Info,

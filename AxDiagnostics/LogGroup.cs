@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace AxDiagnostics
 {
+	/// <summary>
+	/// A specialized collection of <see cref="AxDiagnostics.Log"/>s.<br></br>
+	/// Generally is used for grouping <see cref="AxDiagnostics.Log"/>s created in a common <see cref="Thread"/>.
+	/// </summary>
 	public class LogGroup
 	{
 		public string Name { get; }
