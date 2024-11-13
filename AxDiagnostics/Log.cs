@@ -34,7 +34,7 @@ namespace AxDiagnostics
 		public override string ToString()
 		{
 			string indentationString = new string('#', Indentation).Replace("#","|\t");
-			return $"[{CreationDate}]\t{indentationString}[{Severity}] ({OriginThreadName} @ {OriginTypeFQN}.{OriginMethodName}) : {Text}";
+			return $"[{CreationDate}]\t{indentationString}[{Severity}] ({(OriginThreadName == null ? "" : $"{OriginMethodName} @ ")}{OriginTypeFQN}.{OriginMethodName}) : {Text}";
 		}
 
 		#region Kind Driven Construction
