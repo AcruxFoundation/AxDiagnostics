@@ -14,6 +14,12 @@ namespace AxDiagnostics
 		public DateTime FirstTimeLogged => OrderedLogs.First().CreationDate;
 		public DateTime LastTimeLogged => OrderedLogs.Last().CreationDate;
 
+		public void Log(Log log)
+		{
+			AddLog(log);
+			log.Display();
+		}
+
 		public void AddLog(Log log)
 		{
 			Logs.Add(log);

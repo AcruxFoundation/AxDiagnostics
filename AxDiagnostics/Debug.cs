@@ -10,6 +10,11 @@ namespace AxDiagnostics
 	{
 		public static List<DebugSection> Sections { get; } = [];
 
+		public static void AddSection(DebugSection section)
+		{
+			Sections.Add(section);
+		}
+
 		public static void Display()
 		{
 			string message = "[DEBUG]\n";
@@ -17,6 +22,7 @@ namespace AxDiagnostics
 			{
 				message += $"{section}\n";
 			}
+			System.Diagnostics.Debug.WriteLine(message);
 		}
 	}
 }
