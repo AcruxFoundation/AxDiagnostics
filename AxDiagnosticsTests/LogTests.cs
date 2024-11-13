@@ -76,6 +76,10 @@ namespace AxDiagnostics.Tests
 			using (var process = new DebugProcess(logGroup))
 			{
 				process.Log(Log.Message("Testing!"));
+				using (var innerProcess = new DebugProcess(logGroup))
+				{
+					process.Log(Log.Info("Reached inner process."));
+				}
 			}
 		}
 	}
