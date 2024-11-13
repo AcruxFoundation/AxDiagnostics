@@ -29,6 +29,25 @@ namespace AxDiagnostics
 			}
 		}
 
+		/// <summary>
+		/// Returns an already exisitng or new instance of <see cref="LogGroup"/>
+		/// from this <see cref="DebugSection"/> that's used for sharing logs created
+		/// from the current thread
+		/// </summary>
+		/// <returns></returns>
+		public LogGroup GetGroupForThread()
+		{
+			string name = $"[Thread] {Thread.CurrentThread.Name}";
+
+			if (Groups.TryGetValue(name, out LogGroup? value)) return value;
+			else
+			{
+				LogGroup group = new LogGroup(name);
+				AddGroup(group);
+				return group;
+			}
+		}
+
 		public override string ToString()
 		{
 			string message = $"[GROUP SECTION : {Name}]\n";

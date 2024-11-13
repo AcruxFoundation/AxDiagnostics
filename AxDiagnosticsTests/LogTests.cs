@@ -71,7 +71,7 @@ namespace AxDiagnostics.Tests
 		public void DebugTest01()
 		{
 			DebugSection moduleDebugSection = Debug.GetOrCreateSection("Module");
-			LogGroup logGroup = moduleDebugSection.GetOrCreateGroup(Thread.CurrentThread.Name);
+			LogGroup logGroup = moduleDebugSection.GetGroupForThread();
 
 			logGroup.Log(Log.Message("Testing!"));
 		}
