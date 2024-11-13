@@ -26,6 +26,7 @@ namespace AxDiagnostics
 			Console.ForegroundColor = LogSeverityColors.GetColorBySeverity(Severity);
 
 			System.Diagnostics.Debug.WriteLine(this);
+			Console.WriteLine(this);
 
 			Console.ForegroundColor = originalColor;
 		}

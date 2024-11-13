@@ -17,8 +17,8 @@ namespace AxDiagnostics
 				case LogSeverity.Warning: return ConsoleColor.Yellow;
 				case LogSeverity.Error: return ConsoleColor.Red;
 				case LogSeverity.Fatal: return ConsoleColor.DarkRed;
-				case LogSeverity.ProcessStart: return ConsoleColor.Gray;
-				case LogSeverity.ProcessFinish: return ConsoleColor.Gray;
+				case LogSeverity.ProcessStart: return ConsoleColor.DarkGray;
+				case LogSeverity.ProcessFinish: return ConsoleColor.DarkGray;
 				default: return ConsoleColor.White;
 			}
 		}
