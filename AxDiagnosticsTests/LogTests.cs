@@ -18,5 +18,16 @@ namespace AxDiagnostics.Tests
 			Log log = new Log("Testing!", LogKind.Info, MethodInfo.GetCurrentMethod());
 			log.Display();
 		}
+
+		[TestMethod()]
+		public void LogGroupTest()
+		{
+			LogGroup group = new LogGroup("Testing Group");
+			for(int i = 0; i < 10; ++i)
+			{
+				group.AddLog(new Log($"Log #{i + 1}!", LogKind.Message, MethodInfo.GetCurrentMethod()));
+			}
+			group.Display();
+		}
 	}
 }
