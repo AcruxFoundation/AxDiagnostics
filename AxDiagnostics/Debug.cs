@@ -8,17 +8,28 @@ namespace AxDiagnostics
 {
 	public static class Debug
 	{
-		public static List<DebugSection> Sections { get; } = [];
+		public static Dictionary<string, DebugSection> Sections { get; } = [];
 
 		public static void AddSection(DebugSection section)
 		{
-			Sections.Add(section);
+			Sections.Add(section.Name, section);
+		}
+
+		public static DebugSection GetOrCreateSection(string name)
+		{
+			if (Sections.TryGetValue(name, out DebugSection? value)) return value;
+			else
+			{
+				DebugSection section = new DebugSection(name);
+				Sections.Add(name, section);
+				return section;
+			}
 		}
 
 		public static void Display()
 		{
 			string message = "[DEBUG]\n";
-			foreach(DebugSection section in Sections)
+			foreach(DebugSection section in Sections.Values)
 			{
 				message += $"{section}\n";
 			}

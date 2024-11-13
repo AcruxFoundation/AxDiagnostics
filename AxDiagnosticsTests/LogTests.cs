@@ -48,7 +48,7 @@ namespace AxDiagnostics.Tests
 		}
 
 		[TestMethod()]
-		public void DebugTest()
+		public void DebugClassTest()
 		{
 			for(int k = 0; k < 2; ++k)
 			{
@@ -65,6 +65,15 @@ namespace AxDiagnostics.Tests
 				Debug.AddSection(section);
 			}
 			Debug.Display();
+		}
+
+		[TestMethod()]
+		public void DebugTest01()
+		{
+			DebugSection moduleDebugSection = Debug.GetOrCreateSection("Module");
+			LogGroup logGroup = moduleDebugSection.GetOrCreateGroup(Thread.CurrentThread.Name);
+
+			logGroup.Log(new Log("Testing!", LogKind.Info, MethodInfo.GetCurrentMethod()));
 		}
 	}
 }
