@@ -33,7 +33,7 @@ namespace AxDiagnostics.Tests
 		[TestMethod()]
 		public void LogGroupSectionTest()
 		{
-			LogGroupSection section = new("Testing Section");
+			DebugSection section = new("Testing Section");
 
 			for (int i = 0; i < 3; ++i)
 			{

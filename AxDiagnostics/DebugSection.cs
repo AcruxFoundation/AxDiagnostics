@@ -1,6 +1,6 @@
 ﻿namespace AxDiagnostics
 {
-	public class LogGroupSection
+	public class DebugSection
 	{
 		public string Name { get; }
 		public HashSet<LogGroup> Groups { get; } = [];
@@ -25,7 +25,7 @@
 			return message;
 		}
 
-		public LogGroupSection(string name)
+		public DebugSection(string name)
 		{
 			Name = name;
 		}
