@@ -22,7 +22,12 @@ namespace AxDiagnostics
 
 		public void Display()
 		{
+			ConsoleColor originalColor = Console.ForegroundColor;
+			Console.ForegroundColor = LogSeverityColors.GetColorBySeverity(Severity);
+
 			System.Diagnostics.Debug.WriteLine(this);
+
+			Console.ForegroundColor = originalColor;
 		}
 
 		public override string ToString()
