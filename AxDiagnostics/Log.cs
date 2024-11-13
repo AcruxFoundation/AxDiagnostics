@@ -1,10 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 
 namespace AxDiagnostics
 {
 	public class Log
 	{
-		public string Message { get; }
+		public string Text { get; }
 		public LogKind Kind { get; }
 		public DateTime CreationDate { get; }
 		private Thread OriginThread { get; }
@@ -25,9 +26,28 @@ namespace AxDiagnostics
 			return $"[{CreationDate}] [{Kind}] ({OriginThreadName} @ {OriginTypeFQN}.{OriginMethodName}) : {Message}";
 		}
 
-		public Log(string message, LogKind kind, MethodBase? originMethod, Thread? originThread = null)
+		#region Kind Driven Construction
+		public static Log Message(string text) => new Log(text, LogKind.Message);
+		public static Log Info(string text) => new Log(text, LogKind.Info);
+		public static Log Warning(string text) => new Log(text, LogKind.Warning);
+		public static Log Error(string text) => new Log(text, LogKind.Error);
+		public static Log Fatal(string text) => new Log(text, LogKind.Fatal);
+		#endregion
+
+		public Log(string text, LogKind kind)
 		{
-			Message = message;
+			StackTrace stackTrace = new StackTrace();
+
+			Text = text;
+			Kind = kind;
+			OriginMethod = stackTrace.GetFrame(1)?.GetMethod();
+			OriginThread ??= Thread.CurrentThread;
+			CreationDate = DateTime.Now;
+		}
+
+		public Log(string text, LogKind kind, MethodBase? originMethod, Thread? originThread = null)
+		{
+			Text = text;
 			Kind = kind;
 			OriginMethod = originMethod;
 			OriginThread ??= Thread.CurrentThread;
