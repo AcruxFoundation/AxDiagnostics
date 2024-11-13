@@ -29,5 +29,22 @@ namespace AxDiagnostics.Tests
 			}
 			group.Display();
 		}
+
+		[TestMethod()]
+		public void LogGroupSectionTest()
+		{
+			LogGroupSection section = new("Testing Section");
+
+			for (int i = 0; i < 3; ++i)
+			{
+				LogGroup group = new LogGroup($"Testing Group #{i+1}");
+				for (int j = 0; j < 10; ++j)
+				{
+					group.AddLog(new Log($"Log #{j + 1}!", LogKind.Message, MethodInfo.GetCurrentMethod()));
+				}
+				section.AddGroup(group);
+			}
+			section.Display();
+		}
 	}
 }
