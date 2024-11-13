@@ -20,7 +20,6 @@ namespace AxDiagnostics
 
 		public void Log(Log log)
 		{
-			log.Indentation = Group.Indentation;
 			Group.Log(log);
 		}
 

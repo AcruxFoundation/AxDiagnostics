@@ -32,10 +32,39 @@ namespace AxDiagnostics
 		}
 
 		#region Kind Driven Construction
+		/// <summary>
+		/// Creates a new <see cref="Log"/> instance with severity <see cref="LogSeverity.Message"/>.
+		/// </summary>
+		/// <param name="text">The text of the new <see cref="Log"/> instance.</param>
+		/// <returns>The new log instance.</returns>
 		public static Log Message(string text) => new Log(text, LogSeverity.Message, 2);
+
+		/// <summary>
+		/// Creates a new <see cref="Log"/> instance with severity <see cref="LogSeverity.Info"/>.
+		/// </summary>
+		/// <param name="text">The text of the new <see cref="Log"/> instance.</param>
+		/// <returns>The new log instance.</returns>
 		public static Log Info(string text) => new Log(text, LogSeverity.Info, 2);
+
+		/// <summary>
+		/// Creates a new <see cref="Log"/> instance with severity <see cref="LogSeverity.Warning"/>.
+		/// </summary>
+		/// <param name="text">The text of the new <see cref="Log"/> instance.</param>
+		/// <returns>The new log instance.</returns>
 		public static Log Warning(string text) => new Log(text, LogSeverity.Warning, 2);
+
+		/// <summary>
+		/// Creates a new <see cref="Log"/> instance with severity <see cref="LogSeverity.Error"/>.
+		/// </summary>
+		/// <param name="text">The text of the new <see cref="Log"/> instance.</param>
+		/// <returns>The new log instance.</returns>
 		public static Log Error(string text) => new Log(text, LogSeverity.Error, 2);
+
+		/// <summary>
+		/// Creates a new <see cref="Log"/> instance with severity <see cref="LogSeverity.Fatal"/>.
+		/// </summary>
+		/// <param name="text">The text of the new <see cref="Log"/> instance.</param>
+		/// <returns>The new log instance.</returns>
 		public static Log Fatal(string text) => new Log(text, LogSeverity.Fatal, 2);
 		internal static Log ProcessStart(string text) => new Log(text, LogSeverity.ProcessStart, 3);
 		internal static Log ProcessFinish(string text) => new Log(text, LogSeverity.ProcessFinish, 3);

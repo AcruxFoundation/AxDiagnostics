@@ -9,9 +9,20 @@ namespace AxDiagnostics
 	/// </summary>
 	public class DebugSection
 	{
+		/// <summary>
+		/// The name of this <see cref="DebugSection"/>.
+		/// </summary>
 		public string Name { get; }
+
+		/// <summary>
+		/// The <see cref="LogGroup"/>s conforming this <see cref="DebugSection"/>.
+		/// </summary>
 		public Dictionary<string, LogGroup> Groups { get; } = [];
 
+		/// <summary>
+		/// Add a <see cref="LogGroup"/> to this <see cref="DebugSection"/>
+		/// </summary>
+		/// <param name="group">The <see cref="LogGroup"/> to add.</param>
 		public void AddGroup(LogGroup group)
 		{
 			Groups.Add(group.Name, group);
@@ -22,6 +33,12 @@ namespace AxDiagnostics
 			System.Diagnostics.Debug.WriteLine(this);
 		}
 
+		/// <summary>
+		/// Returns an already exisitng or new instance of <see cref="LogGroup"/>
+		/// based on the given <paramref name="name"/>
+		/// </summary>
+		/// <param name="name">The name of the group to get/create.</param>
+		/// <returns></returns>
 		public LogGroup GetOrCreateGroup(string name)
 		{
 			if (Groups.TryGetValue(name, out LogGroup? value)) return value;
