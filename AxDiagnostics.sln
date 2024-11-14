@@ -5,9 +5,11 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxDiagnostics", "AxDiagnostics\AxDiagnostics.csproj", "{9F1D4515-1635-4656-865B-C6FF4D369166}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxDiagnosticsTests", "AxDiagnosticsTests\AxDiagnosticsTests.csproj", "{1412D07D-A1F3-4475-B13E-C923BAF928F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxDiagnosticsTests", "AxDiagnosticsTests\AxDiagnosticsTests.csproj", "{1412D07D-A1F3-4475-B13E-C923BAF928F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{BDBDBD2C-EB09-4FE9-AB07-2F2254DA7B33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{BDBDBD2C-EB09-4FE9-AB07-2F2254DA7B33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxDiagnosticsInspector", "AxDiagnosticsInspector\AxDiagnosticsInspector.csproj", "{EC353481-1B65-4F51-8D15-BE9421AE3C3E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{BDBDBD2C-EB09-4FE9-AB07-2F2254DA7B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDBDBD2C-EB09-4FE9-AB07-2F2254DA7B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDBDBD2C-EB09-4FE9-AB07-2F2254DA7B33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC353481-1B65-4F51-8D15-BE9421AE3C3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC353481-1B65-4F51-8D15-BE9421AE3C3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC353481-1B65-4F51-8D15-BE9421AE3C3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC353481-1B65-4F51-8D15-BE9421AE3C3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
