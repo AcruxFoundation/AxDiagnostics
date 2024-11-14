@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace AxDiagnostics
@@ -8,15 +9,21 @@ namespace AxDiagnostics
 	/// </summary>
 	public class Log
 	{
-		public string Text { get; }
-		public LogSeverity Severity { get; }
-		public DateTime CreationDate { get; }
+		[JsonProperty]
+		public string Text { get; private set; }
+		[JsonProperty]
+		public LogSeverity Severity { get; private set; }
+		[JsonProperty]
+		public DateTime CreationDate { get; private set; }
 		private Thread OriginThread { get; }
-		public string? OriginThreadName => OriginThread.Name;
-		private MethodBase? OriginMethod { get; }
-		public string? OriginMethodName => OriginMethod?.Name;
-		public string? OriginTypeName => OriginMethod?.DeclaringType?.Name;
-		public string? OriginTypeFQN => OriginMethod?.DeclaringType?.FullName;
+		[JsonProperty]
+		public string? OriginThreadName { get; private set; }
+		[JsonProperty]
+		public string? OriginMethodName { get; private set; }
+		[JsonProperty]
+		public string? OriginTypeName { get; private set; }
+		[JsonProperty]
+		public string? OriginTypeFQN { get; private set; }
 		public string? Origin => $"{OriginTypeFQN}.{OriginTypeFQN}";
 		public byte Indentation { get; set; }
 
@@ -79,32 +86,52 @@ namespace AxDiagnostics
 		private Log(string text, LogSeverity kind, byte frameIndex)
 		{
 			StackTrace stackTrace = new StackTrace();
-
+			MethodBase? originMethod = stackTrace.GetFrame(frameIndex)?.GetMethod();
 			Text = text;
 			Severity = kind;
-			OriginMethod = stackTrace.GetFrame(frameIndex)?.GetMethod();
+			
 			OriginThread ??= Thread.CurrentThread;
 			CreationDate = DateTime.Now;
+
+			OriginThreadName = OriginThread.Name;
+			OriginMethodName = originMethod?.Name;
+			OriginTypeName = originMethod?.DeclaringType?.Name;
+			OriginTypeFQN = originMethod?.DeclaringType?.FullName;
 		}
 
 		public Log(string text, LogSeverity kind)
 		{
 			StackTrace stackTrace = new StackTrace();
+			MethodBase? originMethod = stackTrace.GetFrame(1)?.GetMethod();
 
 			Text = text;
 			Severity = kind;
-			OriginMethod = stackTrace.GetFrame(1)?.GetMethod();
 			OriginThread ??= Thread.CurrentThread;
 			CreationDate = DateTime.Now;
+
+			OriginThreadName = OriginThread.Name;
+			OriginMethodName = originMethod?.Name;
+			OriginTypeName = originMethod?.DeclaringType?.Name;
+			OriginTypeFQN = originMethod?.DeclaringType?.FullName;
 		}
 
 		public Log(string text, LogSeverity kind, MethodBase? originMethod, Thread? originThread = null)
 		{
 			Text = text;
 			Severity = kind;
-			OriginMethod = originMethod;
 			OriginThread ??= Thread.CurrentThread;
 			CreationDate = DateTime.Now;
+
+			OriginThreadName = OriginThread.Name;
+			OriginMethodName = originMethod?.Name;
+			OriginTypeName = originMethod?.DeclaringType?.Name;
+			OriginTypeFQN = originMethod?.DeclaringType?.FullName;
+		}
+
+		[JsonConstructor]
+		private Log()
+		{
+
 		}
 	}
 }

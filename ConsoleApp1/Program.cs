@@ -1,5 +1,6 @@
 ﻿using AxDiagnostics;
 
+Debug.DiagnosticsReportFileDestination = "report.axd";
 DebugSection section = Debug.GetOrCreateSection("Console App");
 LogGroup group = section.GetGroupForThread();
 
@@ -20,5 +21,4 @@ using(var process1 = new DebugProcess(group))
 		process2.Log(Log.Fatal("Message!"));
 	}
 }
-
-Console.ReadKey();
+Debug.SaveToFile();

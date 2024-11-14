@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,31 +16,37 @@ namespace AxDiagnostics
 		/// <summary>
 		/// The name of this <see cref="LogGroup"/>
 		/// </summary>
-		public string Name { get; }
+		[JsonProperty]
+		public string Name { get; private set; }
 
 		/// <summary>
 		/// All the logs present in this <see cref="LogGroup"/> (order by log creation is not guaranteed).
 		/// </summary>
-		private List<Log> Logs { get; } = [];
+		[JsonProperty]
+		private List<Log> Logs { get; set; } = [];
 
 		/// <summary>
 		/// All the logs present in this collection ordered by log creation date in ascending order.
 		/// </summary>
+		[JsonIgnore]
 		public IOrderedEnumerable<Log> OrderedLogs => Logs.OrderBy(x => x.CreationDate);
 
 		/// <summary>
 		/// The creation date of the oldest <see cref="AxDiagnostics.Log"/> in this <see cref="LogGroup"/>.
 		/// </summary>
+		[JsonIgnore]
 		public DateTime FirstTimeLogged => OrderedLogs.First().CreationDate;
 
 		/// <summary>
 		/// The creation date of the newest <see cref="AxDiagnostics.Log"/> in this <see cref="LogGroup"/>.
 		/// </summary>
+		[JsonIgnore]
 		public DateTime LastTimeLogged => OrderedLogs.Last().CreationDate;
 
 		/// <summary>
 		/// The indentation level that the next added <see cref="AxDiagnostics.Log"/> will have.
 		/// </summary>
+		[JsonProperty]
 		public byte Indentation { get; private set; }
 
 		/// <summary>

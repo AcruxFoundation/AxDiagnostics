@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 using static System.Collections.Specialized.BitVector32;
 
 namespace AxDiagnostics
@@ -12,12 +13,14 @@ namespace AxDiagnostics
 		/// <summary>
 		/// The name of this <see cref="DebugSection"/>.
 		/// </summary>
-		public string Name { get; }
+		[JsonProperty]
+		public string Name { get; private set; }
 
 		/// <summary>
 		/// The <see cref="LogGroup"/>s conforming this <see cref="DebugSection"/>.
 		/// </summary>
-		public Dictionary<string, LogGroup> Groups { get; } = [];
+		[JsonProperty]
+		public Dictionary<string, LogGroup> Groups { get; private set; } = [];
 
 		/// <summary>
 		/// Add a <see cref="LogGroup"/> to this <see cref="DebugSection"/>

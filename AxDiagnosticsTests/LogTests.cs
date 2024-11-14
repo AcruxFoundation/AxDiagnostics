@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace AxDiagnostics.Tests
 {
@@ -81,6 +82,57 @@ namespace AxDiagnostics.Tests
 					process.Log(Log.Info("Reached inner process."));
 				}
 			}
+		}
+
+		[TestMethod()]
+		public void LogSerializationTest()
+		{
+			Log log1 = Log.Info("This should be serialized correctly.");
+			string json1 = JsonConvert.SerializeObject(log1, Formatting.Indented);
+			System.Diagnostics.Debug.WriteLine(json1);
+
+			Log? log2 = JsonConvert.DeserializeObject<Log>(json1);
+			string json2 = JsonConvert.SerializeObject(log2, Formatting.Indented);
+			Assert.AreEqual(json1, json2);
+		}
+
+		[TestMethod()]
+		public void LogGroupSerializationTest()
+		{
+			LogGroup group = new LogGroup("Testing Group");
+			for (int i = 0; i < 10; ++i)
+			{
+				group.AddLog(new Log($"Log #{i + 1}!", LogSeverity.Message, MethodInfo.GetCurrentMethod()));
+			}
+			string json = JsonConvert.SerializeObject(group, Formatting.Indented);
+			System.Diagnostics.Debug.WriteLine(json);
+
+			LogGroup? group2 = JsonConvert.DeserializeObject<LogGroup>(json);
+			string json2 = JsonConvert.SerializeObject(group2, Formatting.Indented);
+
+			Assert.AreEqual(json, json2);
+		}
+
+		[TestMethod()]
+		public void DebugSectionSerializationTest()
+		{
+			DebugSection section = new("Testing Section");
+
+			for (int i = 0; i < 3; ++i)
+			{
+				LogGroup group = new LogGroup($"Testing Group #{i + 1}");
+				for (int j = 0; j < 10; ++j)
+				{
+					group.AddLog(new Log($"Log #{j + 1}!", LogSeverity.Message, MethodInfo.GetCurrentMethod()));
+				}
+				section.AddGroup(group);
+			}
+			string json = JsonConvert.SerializeObject(section, Formatting.Indented);
+			System.Diagnostics.Debug.WriteLine(json);
+
+			DebugSection? section2 = JsonConvert.DeserializeObject<DebugSection?>(json);
+			string json2 = JsonConvert.SerializeObject(section2, Formatting.Indented);
+			Assert.AreEqual(json, json2);
 		}
 	}
 }
