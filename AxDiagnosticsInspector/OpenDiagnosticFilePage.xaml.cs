@@ -19,6 +19,7 @@ namespace AxDiagnosticsInspector
 
 		private void BtnPickFile_Click(object sender, RoutedEventArgs eventArgs)
 		{
+			LblStatus.Content = null;
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			if (openFileDialog.ShowDialog() ?? false)
 			{
