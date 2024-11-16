@@ -27,7 +27,8 @@ namespace AxDiagnosticsInspector
 
 		private void Load(object sender, RoutedEventArgs e)
 		{
-			Frame.Content = new OpenDiagnosticFilePage();
+			//Frame.Content = new OpenDiagnosticFilePage();
+			AppHandler.DisplayInspector("{}");
 		}
 	}
 }
